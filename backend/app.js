@@ -3,7 +3,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauceRouter')
+const dotenv = require("dotenv");
 const path = require('path');
+
+dotenv.config();
+
+let test = `mongodb+srv://${process.env.PW_MONGO}@cluster0.2sihgh3.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect('mongodb+srv://ThomasLC:KnHCUKblG8KdXgIX@cluster0.2sihgh3.mongodb.net/?retryWrites=true&w=majority',
     {

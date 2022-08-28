@@ -4,6 +4,18 @@ const User = require('../models/User');
 
 
 exports.signup = (req, res, next) => {
+
+    const pw = req.body.password
+    const pwValid = true
+
+    if (pw.length <= 8 || pw.length > 13)
+        pwValid = false
+
+    if (!pwValid) {
+        return res.status(401).json({ error: 'password must be between 8 and 13 characters' })
+    }
+
+
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({

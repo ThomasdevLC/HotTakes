@@ -1,5 +1,9 @@
 .env
 images/
+images
+node_modules/
+
+
 
 ### Node ###
 # Logs

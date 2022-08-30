@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauceRouter')
-// const helmet = require('helmet');
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require("dotenv");
 const path = require('path');
 
 dotenv.config();
-mongoose.connect(`mongodb+srv://${process.env.PW_MONGO}@cluster0.2sihgh3.mongodb.net/?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://${process.env.USER_MONGO}:${process.env.PW_MONGO}@cluster0.2sihgh3.mongodb.net/?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -20,8 +20,11 @@ mongoose.connect(`mongodb+srv://${process.env.PW_MONGO}@cluster0.2sihgh3.mongodb
 const app = express();
 app.use(express.json());
 
-// app.use(helmet());
-// app.disable('x-powered-by');
+app.use(
+    helmet({
+        crossOriginEmbedderPolicy: false,
+        crossOriginResourcePolicy: false,
+    }));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
